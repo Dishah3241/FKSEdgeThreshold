@@ -1,0 +1,10 @@
+
+namespace FKSEdgeThreshold.Palomar
+
+set_option warningAsError false in
+/-- Any two distinct elements of `{2, 3, 5}` are coprime. -/
+theorem target :
+    FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.SmallPrimesCoprime := by
+  sorry
+
+end FKSEdgeThreshold.Palomar

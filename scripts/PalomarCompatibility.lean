@@ -26,7 +26,7 @@ private structure AuditConfig where
 
 private def defaultConfig : AuditConfig where
   moduleName := `FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold
-  root := `FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.SmallPrimesCoprime
+  root := `FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.edgeThreshold
 
 private def AuditConfig.privatePrefix (config : AuditConfig) : Name :=
   ("_private." ++ config.moduleName.toString).toName

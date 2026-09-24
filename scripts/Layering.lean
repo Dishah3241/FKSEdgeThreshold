@@ -59,6 +59,8 @@ private def subjectRoots : Array (Name × String) := #[
 private def leafRoots : Array Name := #[
   `FKSEdgeThreshold.Examples,
   `FKSEdgeThreshold.Standalone,
+  -- Equivalence imports the two standalone statements, so it is a later leaf.
+  `FKSEdgeThreshold.Stage1,
 ]
 
 private def isLocalTest (name : Name) : Bool :=

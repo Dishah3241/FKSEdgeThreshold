@@ -8,7 +8,7 @@ module
 public import FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThresholdProof
 
 /-!
-# Frankl-Kupavskii-Swanepoel Theorem 3: fewer than C(d+2,2) edges embeds in R^d
+# Frankl–Kupavskii–Swanepoel edge threshold
 
 Connects Palomar's advertised declaration to the proof. This module contains no mathematics: it
 restates the theorem Comparator checks and discharges it from the development.
@@ -21,9 +21,10 @@ public section
 
 namespace FKSEdgeThreshold.Palomar
 
-/-- Any two distinct elements of `{2, 3, 5}` are coprime. -/
+/-- For every `d ≥ 4`, every finite simple graph with fewer than `C(d + 2, 2)` edges is
+unit-distance realizable in `ℝ^d`, and `K_{d+2}` has exactly that many edges and is not. -/
 theorem target :
-    FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.SmallPrimesCoprime :=
-  FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.SmallPrimesCoprime.proof
+    FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.edgeThreshold :=
+  FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.edgeThreshold.proof
 
 end FKSEdgeThreshold.Palomar

@@ -37,13 +37,29 @@ def edgeThreshold : Prop :=
               (SimpleGraph.completeGraph (Fin (d + 2))).Adj v w →
                 dist (p v) (p w) = 1
 
-/-- The dimension and edge-count hypotheses have a joint instance, including the empty graph. -/
-theorem edgeThreshold.witness :
+/-- Dropping the anonymous hypothesis `4 ≤ d` leaves a false statement. At `d = 0` the edgeless
+graph on two vertices has no injective placement in `ℝ⁰`. -/
+def edgeThreshold.drop1 : Prop :=
+  ¬ ∀ (d : ℕ),
+      (∀ (n : ℕ) (G : SimpleGraph (Fin n)),
+        G.edgeSet.ncard < (d + 2).choose 2 →
+          ∃ p : Fin n → EuclideanSpace ℝ (Fin d),
+            Function.Injective p ∧
+              ∀ v w : Fin n, G.Adj v w → dist (p v) (p w) = 1) ∧
+        (SimpleGraph.completeGraph (Fin (d + 2))).edgeSet.ncard =
+          (d + 2).choose 2 ∧
+        ¬ ∃ p : Fin (d + 2) → EuclideanSpace ℝ (Fin d),
+            Function.Injective p ∧
+              ∀ v w : Fin (d + 2),
+                (SimpleGraph.completeGraph (Fin (d + 2))).Adj v w →
+                  dist (p v) (p w) = 1
+
+/-- The claim holds, and its dimension and edge-count hypotheses have a joint instance: the empty
+graph on `Fin 0` at `d = 4`. -/
+def edgeThreshold.witness : Prop :=
+  edgeThreshold ∧
     ∃ (d n : ℕ) (G : SimpleGraph (Fin n)),
-      4 ≤ d ∧ G.edgeSet.ncard < (d + 2).choose 2 := by
-  refine ⟨4, 0, ⊥, by decide, ?_⟩
-  simp only [SimpleGraph.edgeSet_bot, Set.ncard_empty, Nat.reduceAdd]
-  decide
+      4 ≤ d ∧ G.edgeSet.ncard < (d + 2).choose 2
 
 /-- Without `d ≥ 4`, the edgeless two-vertex graph cannot be injected into `ℝ⁰`. -/
 theorem edgeThreshold.dropHdim :
@@ -67,3 +83,13 @@ theorem edgeThreshold.dropHdim :
   exact hneq (hp (Subsingleton.elim (p 0) (p 1)))
 
 end FKSEdgeThreshold.StatementB
+
+/-!
+## Formal proof
+
+Proved in `StatementBProof`.
+
+* `edgeThreshold` → `edgeThreshold.proof`
+* `drop1` → `drop1.proof`
+* `witness` → `witness.proof`
+-/

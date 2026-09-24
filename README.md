@@ -4,7 +4,7 @@ A Lean certification of a result already solved in the human literature.
 
 | | |
 |---|---|
-| Stage | 1 — statement freeze |
+| Stage | proved statement; blueprint checkdecls is Stage 2 |
 | Palomar entry | not yet submitted |
 | `formal_proof` PR | not yet opened |
 | Mathlib PR | not yet opened |

@@ -12,7 +12,14 @@ project:
   # The registry abstract, at most 10,000 characters: the mathematical content and the principal
   # results, readable without the repository.
   description: >-
-    Any two distinct elements of `{2, 3, 5}` are coprime.
+    For every integer d ≥ 4, every finite simple graph with fewer than C(d + 2, 2) edges has an
+    injective placement in Euclidean d-space under which every edge has length 1, and the complete
+    graph K_{d+2} has exactly C(d + 2, 2) edges and has no such placement. Equivalently, f(d) =
+    C(d + 2, 2), where f(d) is the least number of edges in a finite simple graph with no
+    unit-distance representation in R^d. Non-edges may also lie at distance 1. Finite simple
+    graphs are represented as SimpleGraph (Fin n), including the empty graph. The proof is
+    Frankl–Kupavskii–Swanepoel Theorem 3, already proved in the GraphDimension library and
+    imported here. The spherical half of the same theorem is not stated.
   authors:                 # humans only; credit models under `automation`
     - "Dishant Shah"
   responsible_maintainers:
@@ -26,29 +33,32 @@ classification:            # one to eight codes from Palomar's taxonomy snapshot
 # `type` is one of paper, book, web discussion, folklore, original-proof or other. At least one
 # source must formalize, adapt or independently prove the result, which makes it source-based.
 sources:
-  - title: "{{SOURCE_TITLE}}"
+  - title: "Embedding graphs in Euclidean space"
     authors:
-      - "{{SOURCE_AUTHORS}}"
-    id: "{{SOURCE_DOI_OR_URL}}"
+      - "Nóra Frankl"
+      - "Andrey Kupavskii"
+      - "Konrad J. Swanepoel"
+    id: "https://arxiv.org/abs/1802.03092"
     type: "paper"
-    location: "{{SOURCE_PINPOINT}}"
+    location: >-
+      J. Combin. Theory Ser. A 171 (2020) 105146, Theorem 3; arXiv:1802.03092, main.tex,
+      the definition of f(d) at line 82 and the theorem labeled d+2 choose 2 at line 91
     relationship: "formalizes"
     author_endorsement: "not-contacted"
     note: >-
-      The proof of record, cited at its exact pinpoint.
+      The proof of record. The frozen statement is the finite simple reading of the Euclidean
+      clause: d ≥ 4, graphs SimpleGraph (Fin n), fewer than C(d + 2, 2) edges, and K_{d+2} at
+      equality. The spherical clause of the same theorem is not included.
 
-# Prior or parallel formalizations. When the statement came from formal-conjectures, that
-# repository belongs here, pinned to a commit.
-related_formalizations:
-  - id: "https://github.com/google-deepmind/formal-conjectures/blob/{{FC_COMMIT}}/{{FC_PATH}}"
-    relationship: "builds-on"
-    note: >-
-      The formal statement is this file's {{FC_DECLARATION}}, reproduced with its supporting
-      definitions inlined so that it depends on Mathlib alone.
+# The cached formal-conjectures tree has no declaration of this theorem. The statement was
+# written in this repository.
+related_formalizations: []
 
 status:
   scope: >-
-    {{SCOPE}}
+    The Euclidean edge threshold f(d) = C(d + 2, 2) for finite simple graphs and every natural
+    number d ≥ 4, including the sharpness example K_{d+2}. The spherical clause of Theorem 3 is
+    out of scope.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -61,24 +71,61 @@ status:
 
 fidelity:
   divergences: >-
-    {{DIVERGENCES}}
+    The printed theorem says "any graph" for d > 3. The frozen statement uses finite simple
+    graphs, SimpleGraph (Fin n), because the proof deletes vertices of degree at most d - 2 and
+    compares finite edge counts; an infinite edgeless graph need not inject into R^d. For a
+    natural number, d > 3 is 4 ≤ d. Edge counts are natural numbers, so fewer than C(d + 2, 2)
+    is at most C(d + 2, 2) - 1. Statement B was authored as a theorem whose proof was sorry.
+    The manager replaced that theorem by the definition
+    FKSEdgeThreshold.StatementB.edgeThreshold, keeping the statement text, so the file
+    elaborates under warningAsError. B inlines the placement condition; A names it
+    UnitDistanceRealizable. FKSEdgeThreshold.Stage1.Equivalence.edgeThresholdIff proves the two
+    claims agree. The fidelity audit reads definition bodies, so B's drop of the anonymous
+    hypothesis 4 ≤ d is the definition edgeThreshold.drop1, the same negation as the authored
+    theorem edgeThreshold.dropHdim, and edgeThreshold.witness conjoins the authored
+    satisfiability instance with the claim.
 
 automation:
   # One entry per phase. `method` is manual, copilot, agent, autonomous or other. Only 3 of
   # Palomar's first 36 entries disclosed AI assistance; this workspace discloses it every time.
+  # Model strings are the output of harness/run-model on the run id. Framework versions are not
+  # in that output.
   methods:
     - method: "agent"
-      models: ["{{MODEL_FROM_RUN_LOG}}"]
-      framework: "{{HARNESS_AND_VERSION}}"
+      models: ["Grok 4.7 500K Extra High Fast"]
+      framework: "Cursor"
       tool_setup: >-
-        {{PHASE}}: what this phase produced, and its run ids.
+        Statement A. Run 20260923-175621-9fa9bed3 wrote
+        FKSEdgeThreshold/Standalone/Mathlib/StatementA.lean: the claim edgeThreshold, the
+        predicate UnitDistanceRealizable, the separating example, drop1, and the witness.
+        Committed as 624708e.
+    - method: "agent"
+      models: ["gpt-6-sol"]
+      framework: "Codex"
+      tool_setup: >-
+        Statement B. Run 20260923-175626-5ae3d378 wrote
+        FKSEdgeThreshold/Standalone/Mathlib/StatementB.lean. The manager then replaced the
+        authored sorry theorem by a Prop definition with the same text. Committed as 624708e.
+    - method: "agent"
+      models: ["glm-5.3-flash"]
+      framework: "pi"
+      tool_setup: >-
+        Equivalence. Run 20260923-181702-bb6a3e65 proved
+        FKSEdgeThreshold.Stage1.Equivalence.edgeThresholdIff in both directions. Committed as
+        b5c366a.
   spend_usd: "subscription-based usage"
   notes: >-
-    {{PROCESS}}: who chose the target, who signed off the statement's meaning, and what a human
-    actually read.
+    The library dependency is GraphDimension, required as the sibling path ../GraphDimension in
+    lakefile.toml. A 40-character pin is left for publication. The integration run is
+    20260923-182926-e09e95f9; harness/run-model reports its model as not evidenced. Statement A
+    is run 20260923-175621-9fa9bed3, statement B is run 20260923-175626-5ae3d378, and the
+    equivalence is run 20260923-181702-bb6a3e65.
 
 limitations: >-
-  {{LIMITATIONS}}
+  The frozen statement is the finite simple reading of the Euclidean clause of Theorem 3. The
+  spherical clause, realizability on the sphere of radius 1/sqrt(2) for graphs avoiding
+  K_{d+2} - K_3 and K_{d+1}, is not stated. The proof depends on GraphDimension at the sibling
+  path ../GraphDimension; the 40-character revision pin is left for publication.
 
 review:
   status: "{{REVIEW_STATUS}}"    # unchecked, agent-reviewed, self-assessed, peer-reviewed or author-verified

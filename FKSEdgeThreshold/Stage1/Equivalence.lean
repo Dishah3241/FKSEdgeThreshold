@@ -7,6 +7,7 @@ module
 
 public import FKSEdgeThreshold.Standalone.Mathlib.StatementA
 public import FKSEdgeThreshold.Standalone.Mathlib.StatementB
+public import FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold
 
 /-!
 # Equivalence of Statements A and B
@@ -46,5 +47,12 @@ theorem edgeThresholdIff :
     obtain ⟨hreal, hK, hnoK⟩ := h d hd
     exact ⟨fun n G hG => (unitDistanceRealizableIff G).mpr (hreal n G hG), hK,
       fun h => hnoK ((unitDistanceRealizableIff _).mp h)⟩
+
+/-- The inline statement, which `Challenge.lean` repeats and `Solution.lean` proves, has the same
+body as statement A's `FKSEdgeThreshold.StatementA.edgeThreshold`. -/
+theorem inlineIffStatementA :
+    FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold.edgeThreshold ↔
+      FKSEdgeThreshold.StatementA.edgeThreshold :=
+  Iff.rfl
 
 end FKSEdgeThreshold.Stage1.Equivalence

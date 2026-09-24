@@ -27,8 +27,8 @@ project:
   license: "Apache-2.0"    # must match the root LICENSE exactly
 
 classification:            # one to eight codes from Palomar's taxonomy snapshots
-  arxiv: ["{{ARXIV_CATEGORY}}"]     # e.g. "math.CO"
-  msc2020: ["{{MSC2020_CODE}}"]     # e.g. "05C35"; may be empty
+  arxiv: ["math.CO", "math.MG"]    # arXiv 1802.03092: primary math.CO, cross-list math.MG
+  msc2020: ["05C62", "52C10"]      # geometric representations of graphs; Erdős problems in discrete geometry
 
 # `type` is one of paper, book, web discussion, folklore, original-proof or other. At least one
 # source must formalize, adapt or independently prove the result, which makes it source-based.
@@ -113,22 +113,66 @@ automation:
         Equivalence. Run 20260923-181702-bb6a3e65 proved
         FKSEdgeThreshold.Stage1.Equivalence.edgeThresholdIff in both directions. Committed as
         b5c366a.
+    - method: "agent"
+      models: ["glm-5.3-flash", "Grok 4.7 500K Extra High Fast", "gpt-6-sol"]
+      framework: "pi, Cursor, Codex"
+      tool_setup: >-
+        GraphDimension library leaves for FKS's lemmas, each a separate run, verified and landed by
+        the manager: Lovász's partition lemma (Cursor, 20260923-131348-38a6e649), the (d - 1)-core
+        (pi, 20260923-133354-f1205a45), two simplices and a two-edge tail (Cursor,
+        20260923-133355-d0e88449), spherical placements and poles (Cursor,
+        20260923-140417-148549b7), the point off the sphere (pi, 20260923-141330-380566a5), Lemma 11
+        and Corollary 12 (Cursor, 20260923-142253-71337cc7), the cross-polytope lemma (pi,
+        20260923-144608-a0dcc39d), Proposition 2 (Cursor 20260923-144829-ee14f2dc; Codex gpt-6-sol
+        20260923-155153-0b801fd1 and 20260923-161545-e38c2a67), the induction's definitions and
+        S(2) (Cursor, 20260923-153748-3fbd1e63), and the edge counts (Cursor,
+        20260923-162007-f5aec176).
+    - method: "agent"
+      models: ["gpt-6-astra"]
+      framework: "Codex"
+      tool_setup: >-
+        The induction: Case 2's equality configuration (20260923-163438-a9464940), the branches of
+        the step with a Lean counterexample to FKS's Case 2 deduction at d = 3
+        (20260923-164931-ac2429ac), and the repaired bridge, the step and Theorem 3
+        (20260923-171651-ead7e76d), in GraphDimension.
+    - method: "agent"
+      models: ["Grok 4.7 500K Extra High Fast", "glm-5.3-flash"]
+      framework: "Cursor, pi"
+      tool_setup: >-
+        This repository: integration, proof siblings and gates (Cursor, 20260923-182926-e09e95f9);
+        the Stage 2 blueprint (pi, 20260923-203315-fbc41989).
+    - method: "agent"
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        The managing agent: the blueprint, the induction's definitions, every worker brief, the
+        repair of FKS's Case 2 at d = 3, verification and landing of every run, and this
+        repository's pin, Comparator record and Compass list. The independent review (read-only,
+        run 20260923-205905-132c1d1c) is also Claude Opus 5.5, in a separate session.
   spend_usd: "subscription-based usage"
   notes: >-
-    The library dependency is GraphDimension, required as the sibling path ../GraphDimension in
-    lakefile.toml. A 40-character pin is left for publication. The integration run is
-    20260923-182926-e09e95f9; harness/run-model reports its model as not evidenced. Statement A
-    is run 20260923-175621-9fa9bed3, statement B is run 20260923-175626-5ae3d378, and the
-    equivalence is run 20260923-181702-bb6a3e65.
+    The proof lives in the GraphDimension library, required as a git dependency pinned to
+    103e26bc705a61f93ef7985c74498668cbdf7e01. The managing agent (Claude Code, Claude Opus 5.5), directed by
+    the human maintainer, wrote the blueprint and every worker brief, fixed the definitions (FKSStatement, fksBudget,
+    completeMinusTriangle, SphereEmbeddable), verified and landed every run, and found and
+    repaired the gap in FKS's Case 2 at d = 3 (Math finding A38) before the proof was written.
+    Stage 1's two authors worked blind but from briefs that fixed the reading of the paper in
+    advance (finite simple graphs, injective placements, unconstrained non-edges, d ≥ 4, the
+    K_{d+2} clause), so A ↔ B guards against encoding drift, not against a misreading of the
+    paper; the owner's Compass review and the independent review check that reading.
 
 limitations: >-
   The frozen statement is the finite simple reading of the Euclidean clause of Theorem 3. The
   spherical clause, realizability on the sphere of radius 1/sqrt(2) for graphs avoiding
-  K_{d+2} - K_3 and K_{d+1}, is not stated. The proof depends on GraphDimension at the sibling
-  path ../GraphDimension; the 40-character revision pin is left for publication.
+  K_{d+2} - K_3 and K_{d+1}, is not stated. The proof depends on GraphDimension, pinned at
+  103e26bc705a61f93ef7985c74498668cbdf7e01.
 
 review:
-  status: "{{REVIEW_STATUS}}"    # unchecked, agent-reviewed, self-assessed, peer-reviewed or author-verified
+  status: "agent-reviewed"    # unchecked, agent-reviewed, self-assessed, peer-reviewed or author-verified
   reviewers: []
   notes: >-
-    {{REVIEW_NOTES}}
+    An independent read-only review by Claude Opus 5.5 (run 20260923-205905-132c1d1c), a model
+    lineage that wrote none of the proof, is saved as docs/review-2026-09-23.md: no
+    misformalization, statement checked against the rendered source, verdict "publish after
+    fixes", with those fixes applied. The owner signs the Compass list, docs/compass.md.
+    Comparator accepts under the Lean and NanoDa kernels (docs/comparator-2026-09-23.md).

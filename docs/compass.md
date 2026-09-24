@@ -7,7 +7,8 @@ proof interior and the GraphDimension library, is checked by the kernel and the 
 The project declarations are in `FKSEdgeThreshold/Standalone/Mathlib/InlineFKSEdgeThreshold.lean`,
 namespace `FKSEdgeThreshold.Standalone.Mathlib.InlineFKSEdgeThreshold`. Rows 8–11 are Mathlib's.
 
-**Owner sign-off: not yet given.** Any change to a row cancels a sign-off.
+**Owner sign-off: confirmed on 2026-09-23 for rows 1–11** (the owner, in the Math driver session: "sign the
+row"), on the list as committed at `e70431f`. Any change to a row cancels it.
 
 - The statement is authored, not inherited: `formal-conjectures` does not state it. Stage 1 wrote it
   twice, blind, from the paper: statement A by cursor (Grok 4.7), statement B by codex (gpt-6-sol).

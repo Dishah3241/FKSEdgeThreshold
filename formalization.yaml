@@ -19,7 +19,9 @@ project:
     unit-distance representation in R^d. Non-edges may also lie at distance 1. Finite simple
     graphs are represented as SimpleGraph (Fin n), including the empty graph. The proof is
     Frankl–Kupavskii–Swanepoel Theorem 3, already proved in the GraphDimension library and
-    imported here. The spherical half of the same theorem is not stated.
+    imported here. The spherical half of the same theorem is not stated. The question belongs to
+    discrete geometry and extremal graph theory, specifically the study of unit-distance
+    representations and the dimension of graphs.
   authors:                 # humans only; credit models under `automation`
     - "Dishant Shah"
   responsible_maintainers:

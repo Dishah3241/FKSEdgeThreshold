@@ -12,6 +12,9 @@ none.
 > The theorem says `f(d) = C(d + 2, 2)` for every `d ≥ 4`, answering a question of Erdős and
 > Simonovits (1980).
 
+The question belongs to discrete geometry and extremal graph theory, specifically the study of
+unit-distance representations and the dimension of graphs.
+
 | | |
 |---|---|
 | Proof | complete: no `sorry`; only `propext`, `Classical.choice` and `Quot.sound` |

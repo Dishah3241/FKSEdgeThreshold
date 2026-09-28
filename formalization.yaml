@@ -150,7 +150,7 @@ automation:
         The managing agent: the blueprint, the induction's definitions, every worker brief, the
         repair of FKS's Case 2 at d = 3, verification and landing of every run, and this
         repository's pin, Comparator record and Compass list. The independent review (read-only,
-        run 20260923-205905-132c1d1c) is also Claude Opus 5.5, in a separate session.
+        run 20260923-205905-132c1d1c) is also Claude Opus 5.5, in a separate session with no shared context.
   spend_usd: "subscription-based usage"
   notes: >-
     The proof lives in the GraphDimension library, required as a git dependency pinned to
@@ -161,7 +161,7 @@ automation:
     Stage 1's two authors worked blind but from briefs that fixed the reading of the paper in
     advance (finite simple graphs, injective placements, unconstrained non-edges, d ≥ 4, the
     K_{d+2} clause), so A ↔ B guards against encoding drift, not against a misreading of the
-    paper; the owner's Compass review and the independent review check that reading.
+    paper; the owner's Compass review and the separate-session review check that reading.
 
 limitations: >-
   The frozen statement is the finite simple reading of the Euclidean clause of Theorem 3. The
@@ -173,8 +173,10 @@ review:
   status: "agent-reviewed"    # unchecked, agent-reviewed, self-assessed, peer-reviewed or author-verified
   reviewers: []
   notes: >-
-    An independent read-only review by Claude Opus 5.5 (run 20260923-205905-132c1d1c), a model
-    lineage that wrote none of the proof, is saved as docs/review-2026-09-23.md: no
+    A read-only review in a separate session (run 20260923-205905-132c1d1c) is saved as
+    docs/review-2026-09-23.md. Its model, Claude Opus 5.5, is the same model as the managing
+    agent, which wrote the induction's definitions and the Case 2 repair, so the review is
+    independent of that session's context but not of that model. It found no
     misformalization, statement checked against the rendered source, verdict "publish after
     fixes", with those fixes applied. The owner signs the Compass list, docs/compass.md.
     Comparator accepts under the Lean and NanoDa kernels (docs/comparator-2026-09-23.md).

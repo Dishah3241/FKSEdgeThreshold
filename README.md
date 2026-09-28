@@ -21,7 +21,7 @@ unit-distance representations and the dimension of graphs.
 | Comparator | accepted by Lean's kernel and by NanoDa ([record](docs/comparator-2026-09-23.md)) |
 | Library | [GraphDimension](https://github.com/Dishah3241/GraphDimension), which Lake fetches at the revision pinned in `lake-manifest.json`; the proof is `SimpleGraph.unitDistEmbeddable_of_ncard_edgeSet_lt` there |
 | Statement review | the statement was written twice, independently, and the two versions are proved equivalent in Lean (`FKSEdgeThreshold/Stage1/`); the owner signed the [Compass list](docs/compass.md) |
-| Review | an independent, read-only review found no misformalization ([record](docs/review-2026-09-23.md)) |
+| Review | a read-only review in a separate session found no misformalization ([record](docs/review-2026-09-23.md)); it ran on the same model as the managing agent, Claude Opus 5.5 |
 | Blueprint | [web](https://dishah3241.github.io/FKSEdgeThreshold/), built by CI from `blueprint/src/content.tex` and checked against the Lean by `leanblueprint checkdecls` |
 | `formal-conjectures` link | none: the statement is not in `formal-conjectures` |
 | Mathlib | candidate lemmas are recorded for later proposal; no pull request is open |

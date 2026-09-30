@@ -25,7 +25,7 @@ unit-distance representations and the dimension of graphs.
 | Blueprint | [web](https://dishah3241.github.io/FKSEdgeThreshold/), built by CI from `blueprint/src/content.tex` and checked against the Lean by `leanblueprint checkdecls` |
 | `formal-conjectures` link | none: the statement is not in `formal-conjectures` |
 | Mathlib | candidate lemmas are recorded for later proposal; no pull request is open |
-| Palomar entry | not yet submitted |
+| Palomar entry | [PALOMAR-2026-09-30-000016](https://palomar-registry.org/entry.html?id=PALOMAR-2026-09-30-000016&version=1), registered at commit `b0577b9`, trust level high ([record](docs/palomar-2026-09-28.md)) |
 
 ## The statement
 
